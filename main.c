@@ -51,7 +51,7 @@ int main(void) {
           for(int y = 0; enemies[y][0] != 999; y++) {
             if(enemies[y][0] > vertical_position && enemies[y][1] == horizontal_position) {
               score += 100;
-              kill_enemy(y);
+              respawn_enemy(y);
             }
           }
           break;
@@ -60,7 +60,7 @@ int main(void) {
           for(int y = 0; enemies[y][0] != 999; y++) {
             if(enemies[y][0] < vertical_position && enemies[y][1] == horizontal_position) {
               score += 100;
-              kill_enemy(y);
+              respawn_enemy(y);
             }
           }
           break;
@@ -69,7 +69,7 @@ int main(void) {
           for(int y = 0; enemies[y][0] != 999; y++) {
             if(enemies[y][0] == vertical_position && enemies[y][1] < horizontal_position) {
               score += 100;
-              kill_enemy(y);
+              respawn_enemy(y);
             }
           }
           break;
@@ -78,7 +78,7 @@ int main(void) {
           for(int y = 0; enemies[y][0] != 999; y++) {
             if(enemies[y][0] == vertical_position && enemies[y][1] > horizontal_position) {
               score += 100;
-              kill_enemy(y);
+              respawn_enemy(y);
             }
           }
           break;

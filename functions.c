@@ -15,12 +15,12 @@ int random_number(int min_num, int max_num, int modifier) {
   return result;
 }
 
-void kill_enemy(int enemy) {
+void respawn_enemy(int enemy) {
   enemies[enemy][0] = random_number(2, height - 2, enemy + score);
   enemies[enemy][1] = random_number(2, width - 2, enemy + score);
 
   if(enemies[enemy][0] == vertical_position && enemies[enemy][1] == horizontal_position) {
-    kill_enemy(enemy);
+    respawn_enemy(enemy);
   }
 }
 
@@ -108,6 +108,6 @@ void reset() {
 
 void build_enemies() {
   for(int y = 0; enemies[y][0] != 999; y++) {
-    kill_enemy(y);
+    respawn_enemy(y);
   }
 }

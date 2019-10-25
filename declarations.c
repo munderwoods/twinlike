@@ -8,7 +8,7 @@ int fire_duration = 0;
 int enemies[6][2] = {{0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {999,999}};
 
 int random_number(int min_num, int max_num, int modifier);
-void kill_enemy(int enemy);
+void respawn_enemy(int enemy);
 void move_player(int c);
 void move_enemies();
 int death();
