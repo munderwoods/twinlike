@@ -15,7 +15,7 @@ int random_number(int min_num, int max_num, int modifier) {
   return result;
 }
 
-int kill_enemy(int enemy) {
+void kill_enemy(int enemy) {
   enemies[enemy][0] = random_number(2, height - 2, enemy + score);
   enemies[enemy][1] = random_number(2, width - 2, enemy + score);
 
@@ -24,7 +24,7 @@ int kill_enemy(int enemy) {
   }
 }
 
-int move_player(int c) {
+void move_player(int c) {
   switch (c) {
     case 's':
       if (vertical_position + 1 < LINES) {
@@ -67,7 +67,7 @@ int move_player(int c) {
   }
 }
 
-int move_enemies() {
+void move_enemies() {
   for(int y = 0; enemies[y][0] != 999; y++) {
     if(enemies[y][0] < vertical_position) {
       enemies[y][0]++;
@@ -99,14 +99,14 @@ int death() {
   return 0;
 }
 
-int reset() {
+void reset() {
   score = 0; 
   fire_direction = 0;
   fire_duration = 0;
   build_enemies();
 }
 
-int build_enemies() {
+void build_enemies() {
   for(int y = 0; enemies[y][0] != 999; y++) {
     kill_enemy(y);
   }
