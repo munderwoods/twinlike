@@ -4,7 +4,7 @@ int width = 0;
 int height = 0; 
 int vertical_position = 0, horizontal_position = 0;
 int fire_direction = 0;
-int fire_duration = 0;
+int show_fire = 0;
 int enemies[6][2] = {{0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {999,999}};
 
 int random_number(int min_num, int max_num, int modifier);

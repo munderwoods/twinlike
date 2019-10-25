@@ -48,7 +48,7 @@ void move_player(int c) {
       break;
     case 'k':
       fire_direction = 1;
-      fire_duration = 1;
+      show_fire = 1;
       for(int y = 0; enemies[y][0] != 999; y++) {
         if(enemies[y][0] > vertical_position && enemies[y][1] == horizontal_position) {
           score += 100;
@@ -58,7 +58,7 @@ void move_player(int c) {
       break;
     case 'i':
       fire_direction = 2;
-      fire_duration = 1;
+      show_fire = 1;
       for(int y = 0; enemies[y][0] != 999; y++) {
         if(enemies[y][0] < vertical_position && enemies[y][1] == horizontal_position) {
           score += 100;
@@ -68,7 +68,7 @@ void move_player(int c) {
       break;
     case 'j':
       fire_direction = 3;
-      fire_duration = 1;
+      show_fire = 1;
       for(int y = 0; enemies[y][0] != 999; y++) {
         if(enemies[y][0] == vertical_position && enemies[y][1] < horizontal_position) {
           score += 100;
@@ -78,7 +78,7 @@ void move_player(int c) {
       break;
     case 'l':
       fire_direction = 4;
-      fire_duration = 1;
+      show_fire = 1;
       for(int y = 0; enemies[y][0] != 999; y++) {
         if(enemies[y][0] == vertical_position && enemies[y][1] > horizontal_position) {
           score += 100;
@@ -126,7 +126,7 @@ int death() {
 void reset() {
   score = 0; 
   fire_direction = 0;
-  fire_duration = 0;
+  show_fire = 0;
   build_enemies();
 }
 

@@ -44,7 +44,7 @@ int main(void) {
       mvhline(enemies[y][0], enemies[y][1], ACS_DIAMOND, 1);
     }
 
-    if(fire_duration > 0) {
+    if(show_fire > 0) {
       switch (fire_direction) {
         case 1:
           mvvline(vertical_position + 1, horizontal_position, ACS_VLINE, height - vertical_position);
@@ -61,7 +61,7 @@ int main(void) {
         default:
           break;
       }
-      fire_duration--;
+      show_fire--;
     }
 
     int c = getch();
