@@ -86,6 +86,13 @@ void move_player(int c) {
         }
       }
       break;
+    case 't':
+      if(show_debug == 0) {
+        show_debug = 1;
+      } else {
+        show_debug = 0;
+      }
+      break;
     default:
       break;
   }

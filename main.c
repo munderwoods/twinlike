@@ -26,12 +26,11 @@ int main(void) {
       mvprintw(height * .5, (width * .5) - 12, "Move: AWSD, Shoot: JIKL");
     }
 
-    /*
-    // DEBUG ENEMIES
-    for(int y = 0; enemies[y][0] != 999; y++) {
-      mvprintw(y, 0, "%d: %d %d", y, enemies[y][0], enemies[y][1]);
+    if(show_debug == 1) {
+      for(int y = 0; enemies[y][0] != 999; y++) {
+        mvprintw(y, 0, "%d: %d %d", y, enemies[y][0], enemies[y][1]);
+      }
     }
-    */
 
     if(death() == 1) {
       mvprintw(height * .5, (width * .5) - 12, "Game Over. Your Score: %d", score);
