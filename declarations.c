@@ -1,5 +1,5 @@
 int score = 0; 
-int c = 0; 
+int command = 0; 
 int width = 0; 
 int height = 0; 
 int vertical_position = 0, horizontal_position = 0;

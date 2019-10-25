@@ -13,18 +13,18 @@ int main(void) {
 
   build_enemies();
 
-  while (c != 'q') {
+  while (command != 'q') {
     clear();
-
-    score++;
-    c = 0;
 
     render();
 
-    int c = getch();
+    score++;
+    command = 0;
 
+    int command = getch();
+
+    move_player(command);
     move_enemies();
-    move_player(c);
   }
 
   endwin();
