@@ -48,39 +48,15 @@ int main(void) {
       switch (fire_direction) {
         case 1:
           mvvline(vertical_position + 1, horizontal_position, ACS_VLINE, height - vertical_position);
-          for(int y = 0; enemies[y][0] != 999; y++) {
-            if(enemies[y][0] > vertical_position && enemies[y][1] == horizontal_position) {
-              score += 100;
-              respawn_enemy(y);
-            }
-          }
           break;
         case 2:
           mvvline(0, horizontal_position, ACS_VLINE, vertical_position);
-          for(int y = 0; enemies[y][0] != 999; y++) {
-            if(enemies[y][0] < vertical_position && enemies[y][1] == horizontal_position) {
-              score += 100;
-              respawn_enemy(y);
-            }
-          }
           break;
         case 3:
           mvhline(vertical_position, 0, ACS_HLINE, horizontal_position);
-          for(int y = 0; enemies[y][0] != 999; y++) {
-            if(enemies[y][0] == vertical_position && enemies[y][1] < horizontal_position) {
-              score += 100;
-              respawn_enemy(y);
-            }
-          }
           break;
         case 4:
           mvhline(vertical_position, horizontal_position + 1, ACS_HLINE, width - 1);
-          for(int y = 0; enemies[y][0] != 999; y++) {
-            if(enemies[y][0] == vertical_position && enemies[y][1] > horizontal_position) {
-              score += 100;
-              respawn_enemy(y);
-            }
-          }
           break;
         default:
           break;
