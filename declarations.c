@@ -8,6 +8,8 @@ int show_fire = 0;
 int show_debug = 0;
 int enemies[6][2] = {{0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {999,999}};
 
+void render();
+
 int random_number(int min_num, int max_num, int modifier);
 void respawn_enemy(int enemy);
 void move_player(int c);

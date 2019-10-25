@@ -11,3 +11,4 @@
 // #include <SDL2/SDL.h> 
 #include "declarations.c"
 #include "functions.c"
+#include "render.c"
