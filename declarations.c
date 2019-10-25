@@ -16,3 +16,4 @@ void move_player(int c);
 void move_enemies();
 int death();
 void build_enemies();
+void reset();
