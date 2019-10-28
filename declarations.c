@@ -6,7 +6,8 @@ int vertical_position = 0, horizontal_position = 0;
 int fire_direction = 0;
 int show_fire = 0;
 int show_debug = 0;
-int enemies[6][2] = {{0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {999,999}};
+int difficulty = 2;
+int enemies[6][4];
 
 void render();
 
@@ -17,3 +18,4 @@ void move_enemies();
 int death();
 void build_enemies();
 void reset();
+void level();

@@ -11,9 +11,12 @@ int main(void) {
   vertical_position = height * .5;
   horizontal_position = width * .5;
 
+  enemies[5][0] = 999;
+  enemies[5][1] = 999;
   build_enemies();
 
   while (command != 'q') {
+    level();
     clear();
 
     render();

@@ -8,7 +8,7 @@ void render () {
 
     if(show_debug == 1) {
       for(int y = 0; enemies[y][0] != 999; y++) {
-        mvprintw(y, 0, "%d: %d %d", y, enemies[y][0], enemies[y][1]);
+        mvprintw(y, 0, "%d: V%d H%d A%d D%d", y, enemies[y][0], enemies[y][1], enemies[y][2], enemies[y][3]);
       }
     }
 
@@ -20,7 +20,12 @@ void render () {
     }
 
     for(int y = 0; enemies[y][0] != 999; y++) {
-      mvhline(enemies[y][0], enemies[y][1], ACS_DIAMOND, 1);
+      // mvhline(enemies[y][0], enemies[y][1], ACS_DIAMOND, 1);
+      if(show_debug == 1) {
+        mvprintw(enemies[y][0], enemies[y][1], "%d", y);
+      } else {
+        mvhline(enemies[y][0], enemies[y][1], ACS_DIAMOND, 1);
+      }
     }
 
     if(show_fire > 0) {

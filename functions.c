@@ -99,17 +99,61 @@ void move_player(int c) {
 
 void move_enemies() {
   for(int y = 0; enemies[y][0] != 999; y++) {
-    if(enemies[y][0] < vertical_position) {
-      enemies[y][0]++;
-    }
-    if(enemies[y][0] > vertical_position) {
-      enemies[y][0]--;
-    }
-    if(enemies[y][1] > horizontal_position) {
-      enemies[y][1]--;
-    }
-    if(enemies[y][1] < horizontal_position) {
-      enemies[y][1]++;
+    enemies[y][2] = random_number(0, difficulty, enemies[y][0] + enemies[y][1]);
+
+    if(enemies[y][2] == 1) {
+      enemies[y][3] = random_number(1, 4, enemies[y + 1][0] + enemies[y + 1][1]);
+
+      switch (enemies[y][3]) {
+        case 1:
+          if(enemies[y][0] + 1 < height) {
+            enemies[y][0]++;
+          }
+          break;
+        case 2:
+          if(enemies[y][0] - 1 > 1) {
+            enemies[y][0]--;
+          }
+          break;
+        case 3:
+          if(enemies[y][1] + 1 > 1) {
+            enemies[y][1]--;
+          }
+          break;
+        case 4:
+          if(enemies[y][1] + 1 < width) {
+            enemies[y][1]++;
+          }
+          break;
+        default:
+          if(enemies[y][0] < vertical_position) {
+            enemies[y][0]++;
+          }
+          if(enemies[y][0] > vertical_position) {
+            enemies[y][0]--;
+          }
+          if(enemies[y][1] > horizontal_position) {
+            enemies[y][1]--;
+          }
+          if(enemies[y][1] < horizontal_position) {
+            enemies[y][1]++;
+          }
+          break;
+
+      }
+    } else {
+      if(enemies[y][0] < vertical_position) {
+        enemies[y][0]++;
+      }
+      if(enemies[y][0] > vertical_position) {
+        enemies[y][0]--;
+      }
+      if(enemies[y][1] > horizontal_position) {
+        enemies[y][1]--;
+      }
+      if(enemies[y][1] < horizontal_position) {
+        enemies[y][1]++;
+      }
     }
   }
 }
@@ -133,6 +177,8 @@ void reset() {
   score = 0; 
   fire_direction = 0;
   show_fire = 0;
+  enemies[5][0] = 999;
+  enemies[5][1] = 999;
   build_enemies();
 }
 
@@ -140,4 +186,19 @@ void build_enemies() {
   for(int y = 0; enemies[y][0] != 999; y++) {
     respawn_enemy(y);
   }
+}
+
+void level() {
+  int current_enemies = 0;
+  for(int y = 0; enemies[y][0] != 999; y++) {
+    current_enemies = y;
+  }
+
+  if(current_enemies - 4 < score / 1000) {
+    enemies[current_enemies + 1][0] = random_number(2, height - 2, current_enemies + score);
+    enemies[current_enemies + 1][1] = random_number(2, width - 2, current_enemies + score);
+    enemies[current_enemies + 2][0] = 999;
+    enemies[current_enemies + 2][1] = 999;
+  }
+
 }
