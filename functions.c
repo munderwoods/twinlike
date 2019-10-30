@@ -14,12 +14,32 @@ int random_number(int min_num, int max_num, int modifier) {
   return result;
 }
 
-void respawn_enemy(int enemy) {
-  enemies[enemy][0] = random_number(2, height - 2, enemy + score);
-  enemies[enemy][1] = random_number(2, width - 2, enemy + score);
+void respawn_enemy(int enemy_number) {
+  rander++;
+  enemies[enemy_number][0] = random_number(2, height - 2, enemy_number + score + rander);
+  enemies[enemy_number][1] = random_number(2, width - 2, enemy_number + score + rander);
 
-  if(enemies[enemy][0] == vertical_position && enemies[enemy][1] == horizontal_position) {
-    respawn_enemy(enemy);
+  if(colliding(enemy_number) == 0) {
+    respawn_enemy(enemy_number);
+  }
+}
+
+int colliding(int enemy_number) {
+  int pad = 15;
+  int left = horizontal_position - pad;
+  int right = horizontal_position + pad;
+  int top = vertical_position - pad;
+  int bottom = vertical_position + pad;
+
+  if (
+    enemies[enemy_number][0] < top || 
+    enemies[enemy_number][1] < left || 
+    enemies[enemy_number][0] > bottom || 
+    enemies[enemy_number][1] > right 
+  ) {
+    return rander;
+  } else {
+    return 0;
   }
 }
 
@@ -48,7 +68,7 @@ void move_player(int c) {
     case 'k':
       fire_direction = 1;
       show_fire = 1;
-      for(int y = 0; enemies[y][0] != 999; y++) {
+      for(int y = 0; y < enemy_number; y++) {
         if(enemies[y][0] > vertical_position && enemies[y][1] == horizontal_position) {
           score += 100;
           respawn_enemy(y);
@@ -58,7 +78,7 @@ void move_player(int c) {
     case 'i':
       fire_direction = 2;
       show_fire = 1;
-      for(int y = 0; enemies[y][0] != 999; y++) {
+      for(int y = 0; y < enemy_number; y++) {
         if(enemies[y][0] < vertical_position && enemies[y][1] == horizontal_position) {
           score += 100;
           respawn_enemy(y);
@@ -68,7 +88,7 @@ void move_player(int c) {
     case 'j':
       fire_direction = 3;
       show_fire = 1;
-      for(int y = 0; enemies[y][0] != 999; y++) {
+      for(int y = 0; y < enemy_number; y++) {
         if(enemies[y][0] == vertical_position && enemies[y][1] < horizontal_position) {
           score += 100;
           respawn_enemy(y);
@@ -78,7 +98,7 @@ void move_player(int c) {
     case 'l':
       fire_direction = 4;
       show_fire = 1;
-      for(int y = 0; enemies[y][0] != 999; y++) {
+      for(int y = 0; y < enemy_number; y++) {
         if(enemies[y][0] == vertical_position && enemies[y][1] > horizontal_position) {
           score += 100;
           respawn_enemy(y);
@@ -98,8 +118,8 @@ void move_player(int c) {
 }
 
 void move_enemies() {
-  for(int y = 0; enemies[y][0] != 999; y++) {
-    enemies[y][2] = random_number(0, difficulty, enemies[y][0] + enemies[y][1]);
+  for(int y = 0; y < enemy_number; y++) {
+    enemies[y][2] = random_number(0, jitter, enemies[y][0] + enemies[y][1]);
 
     if(enemies[y][2] == 1) {
       enemies[y][3] = random_number(1, 4, enemies[y + 1][0] + enemies[y + 1][1]);
@@ -159,7 +179,7 @@ void move_enemies() {
 }
 
 int death() {
-  for(int y = 0; enemies[y][0] != 999; y++) {
+  for(int y = 0; y < enemy_number; y++) {
     if(
       enemies[y][0] > vertical_position - 2 && 
       enemies[y][0] < vertical_position + 2 &&
@@ -177,28 +197,18 @@ void reset() {
   score = 0; 
   fire_direction = 0;
   show_fire = 0;
-  enemies[5][0] = 999;
-  enemies[5][1] = 999;
+  enemy_number = 5;
   build_enemies();
 }
 
 void build_enemies() {
-  for(int y = 0; enemies[y][0] != 999; y++) {
+  for(int y = 0; y < 100; y++) {
     respawn_enemy(y);
   }
 }
 
-void level() {
-  int current_enemies = 0;
-  for(int y = 0; enemies[y][0] != 999; y++) {
-    current_enemies = y;
+void change_level() {
+  if(enemy_number - 4 < score / 1000) {
+    enemy_number++;
   }
-
-  if(current_enemies - 4 < score / 1000) {
-    enemies[current_enemies + 1][0] = random_number(2, height - 2, current_enemies + score);
-    enemies[current_enemies + 1][1] = random_number(2, width - 2, current_enemies + score);
-    enemies[current_enemies + 2][0] = 999;
-    enemies[current_enemies + 2][1] = 999;
-  }
-
 }
