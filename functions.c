@@ -68,7 +68,7 @@ void move_player(int c) {
     case 'k':
       fire_direction = 1;
       show_fire = 1;
-      for(int y = 0; y < enemy_number; y++) {
+      for(int y = 0; y < number_of_enemies; y++) {
         if(enemies[y][0] > vertical_position && enemies[y][1] == horizontal_position) {
           score += 100;
           respawn_enemy(y);
@@ -78,7 +78,7 @@ void move_player(int c) {
     case 'i':
       fire_direction = 2;
       show_fire = 1;
-      for(int y = 0; y < enemy_number; y++) {
+      for(int y = 0; y < number_of_enemies; y++) {
         if(enemies[y][0] < vertical_position && enemies[y][1] == horizontal_position) {
           score += 100;
           respawn_enemy(y);
@@ -88,7 +88,7 @@ void move_player(int c) {
     case 'j':
       fire_direction = 3;
       show_fire = 1;
-      for(int y = 0; y < enemy_number; y++) {
+      for(int y = 0; y < number_of_enemies; y++) {
         if(enemies[y][0] == vertical_position && enemies[y][1] < horizontal_position) {
           score += 100;
           respawn_enemy(y);
@@ -98,7 +98,7 @@ void move_player(int c) {
     case 'l':
       fire_direction = 4;
       show_fire = 1;
-      for(int y = 0; y < enemy_number; y++) {
+      for(int y = 0; y < number_of_enemies; y++) {
         if(enemies[y][0] == vertical_position && enemies[y][1] > horizontal_position) {
           score += 100;
           respawn_enemy(y);
@@ -118,7 +118,7 @@ void move_player(int c) {
 }
 
 void move_enemies() {
-  for(int y = 0; y < enemy_number; y++) {
+  for(int y = 0; y < number_of_enemies; y++) {
     enemies[y][2] = random_number(0, jitter, enemies[y][0] + enemies[y][1]);
 
     if(enemies[y][2] == 1) {
@@ -179,7 +179,7 @@ void move_enemies() {
 }
 
 int death() {
-  for(int y = 0; y < enemy_number; y++) {
+  for(int y = 0; y < number_of_enemies; y++) {
     if(
       enemies[y][0] > vertical_position - 2 && 
       enemies[y][0] < vertical_position + 2 &&
@@ -197,7 +197,7 @@ void reset() {
   score = 0; 
   fire_direction = 0;
   show_fire = 0;
-  enemy_number = 5;
+  number_of_enemies = 5;
   build_enemies();
 }
 
@@ -208,7 +208,7 @@ void build_enemies() {
 }
 
 void change_level() {
-  if(enemy_number - 4 < score / 1000) {
-    enemy_number++;
+  if(number_of_enemies < 100 && (number_of_enemies - 4 < score / 1000)) {
+    number_of_enemies++;
   }
 }
