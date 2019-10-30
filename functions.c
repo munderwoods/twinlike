@@ -1,4 +1,5 @@
 int random_number(int min_num, int max_num, int modifier) {
+  rander++;
   int result = 0, low_num = 0, hi_num = 0;
 
   if (min_num < max_num) {
@@ -15,9 +16,9 @@ int random_number(int min_num, int max_num, int modifier) {
 }
 
 void respawn_enemy(int enemy_number) {
-  rander++;
-  enemies[enemy_number][0] = random_number(2, height - 2, enemy_number + score + rander);
-  enemies[enemy_number][1] = random_number(2, width - 2, enemy_number + score + rander);
+  int mod = enemy_number + score + rander;
+  enemies[enemy_number][0] = random_number(2, height - 2, mod);
+  enemies[enemy_number][1] = random_number(2, width - 2, mod);
 
   if(colliding(enemy_number) == 0) {
     respawn_enemy(enemy_number);
@@ -25,11 +26,10 @@ void respawn_enemy(int enemy_number) {
 }
 
 int colliding(int enemy_number) {
-  int pad = 15;
-  int left = horizontal_position - pad;
-  int right = horizontal_position + pad;
-  int top = vertical_position - pad;
-  int bottom = vertical_position + pad;
+  int left = horizontal_position - spawn_pad;
+  int right = horizontal_position + spawn_pad;
+  int top = vertical_position - spawn_pad;
+  int bottom = vertical_position + spawn_pad;
 
   if (
     enemies[enemy_number][0] < top || 

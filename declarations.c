@@ -8,6 +8,7 @@ int show_fire = 0;
 int show_debug = 0;
 int jitter = 2;
 int rander = 0;
+int spawn_pad = 15;
 int enemy_number = 5;
 int enemies[100][4];
 
