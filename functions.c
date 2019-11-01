@@ -20,12 +20,12 @@ void respawn_enemy(int enemy_number) {
   enemies[enemy_number][0] = random_number(2, height - 2, mod);
   enemies[enemy_number][1] = random_number(2, width - 2, mod);
 
-  if(colliding(enemy_number) == 0) {
+  if(in_box(enemy_number) == 0) {
     respawn_enemy(enemy_number);
   }
 }
 
-int colliding(int enemy_number) {
+int in_box(int enemy_number) {
   int left = horizontal_position - spawn_pad;
   int right = horizontal_position + spawn_pad;
   int top = vertical_position - spawn_pad;
@@ -190,7 +190,33 @@ int death() {
     }
   }
 
+  /*
+  for(int y = 0; y < number_of_rocks; y++) {
+    if(
+      rocks[y][0] == vertical_position && 
+      rocks[y][1] == horizontal_position
+    ) {
+      return 1;
+    }
+  }
+  */
+
+  if(on_rock(vertical_position, horizontal_position) == 1) {
+    return 1;
+  }
+
   return 0;
+}
+
+int on_rock(int ver_pos, int hor_pos) {
+  for(int y = 0; y < number_of_rocks; y++) {
+    if(
+      rocks[y][0] == ver_pos && 
+      rocks[y][1] == hor_pos
+    ) {
+      return 1;
+    }
+  }
 }
 
 void reset() {
@@ -198,6 +224,7 @@ void reset() {
   fire_direction = 0;
   show_fire = 0;
   number_of_enemies = 5;
+  build_rocks();
   build_enemies();
 }
 
@@ -207,8 +234,41 @@ void build_enemies() {
   }
 }
 
+void * new_rock(int mod) {
+  rock[0] = random_number(2, height - 2, mod);
+  rock[1] = random_number(2, width - 2, mod);
+  return rock;
+}
+
+void build_rocks() {
+  for(int y = 0; y < number_of_rocks; y++) {
+    int mod = y;
+    int *r;
+    r = new_rock(mod);
+    if(rock_present(r[0], r[1]) || rock_present(vertical_position, horizontal_position)) {
+      mod++;
+      r = new_rock(mod);
+    } else {
+      rocks[y][0] = r[0];
+      rocks[y][1] = r[1];
+    }
+  }
+}
+
+int rock_present(int x, int y) {
+  for(int y = 0; y < number_of_rocks; y++) {
+    if(x == rocks[y][0] && rocks[y][1]) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+}
+
 void change_level() {
   if(number_of_enemies < 100 && (number_of_enemies - 4 < score / 1000)) {
     number_of_enemies++;
   }
 }
+

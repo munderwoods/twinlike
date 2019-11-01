@@ -19,6 +19,14 @@ void render () {
       horizontal_position = width * .5;
     }
 
+    for(int y = 0; y < number_of_rocks; y++) {
+      if(show_debug == 1) {
+        mvprintw(rocks[y][0], rocks[y][1], "%d", y);
+      } else {
+        mvhline(rocks[y][0], rocks[y][1], ACS_CKBOARD, 1);
+      }
+    }
+
     for(int y = 0; y < number_of_enemies; y++) {
       if(show_debug == 1) {
         mvprintw(enemies[y][0], enemies[y][1], "%d", y);

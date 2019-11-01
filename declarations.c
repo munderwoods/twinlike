@@ -10,7 +10,10 @@ int jitter = 2;
 int rander = 0;
 int spawn_pad = 15;
 int number_of_enemies = 5;
+int number_of_rocks = 25;
 int enemies[100][4];
+int rocks[100][4];
+int rock[2];
 
 void render();
 
@@ -20,6 +23,9 @@ void move_player(int c);
 void move_enemies();
 int death();
 void build_enemies();
+void build_rocks();
 void reset();
 void change_level();
-int colliding(int enemy);
+int in_box(int enemy);
+int rock_present(int x, int y);
+int on_rock(int ver_pos, int hor_pos);

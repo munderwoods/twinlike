@@ -11,6 +11,7 @@ int main(void) {
   vertical_position = height * .5;
   horizontal_position = width * .5;
 
+  build_rocks();
   build_enemies();
 
   while (command != 'q') {
