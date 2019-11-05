@@ -19,7 +19,7 @@ void render();
 
 int random_number(int min_num, int max_num, int modifier);
 void respawn_enemy(int enemy);
-void move_player(int c);
+void perform_action(int c);
 void move_enemies();
 int death();
 void build_enemies();

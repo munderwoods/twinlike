@@ -43,7 +43,7 @@ int in_box(int enemy_number) {
   }
 }
 
-void move_player(int c) {
+void perform_action(int c) {
   switch (c) {
     case 's':
       if (vertical_position + 1 < LINES) {

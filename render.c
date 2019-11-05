@@ -36,18 +36,47 @@ void render () {
     }
 
     if(show_fire > 0) {
+      int end;
       switch (fire_direction) {
         case 1:
-          mvvline(vertical_position + 1, horizontal_position, ACS_VLINE, height - vertical_position);
+          end = height - 1;
+          for(int y = vertical_position; y <= end; y++) {
+            if(on_rock(y, horizontal_position) == 1) {
+              end = y - vertical_position - 1;
+              break;
+            }
+          }
+          mvvline(vertical_position + 1, horizontal_position, ACS_VLINE, end);
           break;
         case 2:
-          mvvline(0, horizontal_position, ACS_VLINE, vertical_position);
+          end = 0;
+          for(int y = vertical_position; y >= 0; y--) {
+            if(on_rock(y, horizontal_position) == 1) {
+              end = y + 1;
+              break;
+            }
+          }
+          mvvline(end, horizontal_position, ACS_VLINE, vertical_position - end);
           break;
         case 3:
-          mvhline(vertical_position, 0, ACS_HLINE, horizontal_position);
+          end = 0;
+          for(int y = horizontal_position; y >= 0; y--) {
+            if(on_rock(vertical_position, y) == 1) {
+              end = y + 1;
+              break;
+            }
+          }
+          mvhline(vertical_position, end, ACS_HLINE, horizontal_position - end);
           break;
         case 4:
-          mvhline(vertical_position, horizontal_position + 1, ACS_HLINE, width - 1);
+          end = width - 1;
+          for(int y = horizontal_position; y <= end; y++) {
+            if(on_rock(vertical_position, y) == 1) {
+              end = y - horizontal_position - 1;
+              break;
+            }
+          }
+          mvhline(vertical_position, horizontal_position + 1, ACS_HLINE, end);
           break;
         default:
           break;

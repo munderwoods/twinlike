@@ -25,7 +25,7 @@ int main(void) {
 
     int command = getch();
 
-    move_player(command);
+    perform_action(command);
     move_enemies();
   }
 
